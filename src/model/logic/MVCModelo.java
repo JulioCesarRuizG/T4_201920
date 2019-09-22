@@ -23,16 +23,8 @@ public class MVCModelo {
 	private Queue cola;
 	
 	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
-	 */
-	public MVCModelo()
-	{
-		datos = new ArregloDinamico(7);
-	}
-	
-	/**
-	 * Constructor del modelo del mundo con capacidad dada
-	 * @param tamano
+	 * Constructor del modelo del mundo en una cola
+	 * @param ruta
 	 */
 	public MVCModelo(String ruta)
 	{
