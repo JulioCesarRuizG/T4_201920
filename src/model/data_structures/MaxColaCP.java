@@ -76,6 +76,10 @@ public class MaxColaCP<T extends Comparable<T>> {
 	
 	public boolean esVacia()
 	{
-		
+		if(cantidad == 0)
+		{
+			return true;
+		}
+		return false;
 	}
 }
