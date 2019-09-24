@@ -3,12 +3,14 @@ package model.logic;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.opencsv.CSVReader;
 
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 import model.data_structures.Queue;
+import model.data_structures.TravelTime;
 import model.data_structures.Viaje;
 
 /**
@@ -112,6 +114,9 @@ public class MVCModelo {
 	{
 		return datos.eliminar(dato);
 	}
-
+   public ArrayList<TravelTime> generarMuestra(int N){
+	   ArrayList<TravelTime> muestra = new ArrayList<TravelTime>();
+	   return muestra;
+   }
 
 }
