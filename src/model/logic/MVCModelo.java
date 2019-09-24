@@ -9,7 +9,6 @@ import com.opencsv.CSVReader;
 
 import model.data_structures.MaxColaCP;
 import model.data_structures.MaxHeapCP;
-import model.data_structures.Queue;
 import model.data_structures.TravelTime;
 
 
@@ -90,7 +89,7 @@ public class MVCModelo {
            TravelTime viaje = new TravelTime(meanTravelTime, trimestre, sourceId, distId, hod, standard_deviation_travel_time);
            for(int i = 0 ; i < arr.size() ; i++)
            {
-               if (viaje.darMeanTravelTime() == arr.get(i).darMeanTravelTime())
+               if (viaje.compareTo(arr.get(i))==0)
                {
                    existe = true;
                }
