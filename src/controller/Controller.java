@@ -20,7 +20,7 @@ public class Controller {
 	public Controller ()
 	{
 		view = new MVCView();
-		modelo = new MVCModelo(null);
+		modelo = null;;
 	}
 		
 	public void run() 
@@ -29,7 +29,7 @@ public class Controller {
 		boolean fin = false;
 		String dato = "";
 		String respuesta = "";
-		String ruta = "";
+		int ruta = 0;
 
 		while( !fin ){
 			view.printMenu();
@@ -37,8 +37,8 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
-					System.out.println("--------- \nCrear Arreglo \nDar ruta para cargar del arreglo: ");
-					ruta = lector.next();
+					System.out.println("--------- \nCrear archivo \nDar trimestre para cargar el archivo: ");
+					ruta = Integer.parseInt(lector.next());
 				    modelo = new MVCModelo(ruta); 
 					System.out.println("Arreglo Dinamico creado");
 					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						

@@ -29,6 +29,11 @@ public class MVCModelo {
 	 */
 	public MVCModelo(int trimestre)
 	{
+		if(trimestre == 0)
+		{
+			cola = new MaxColaCP<TravelTime>();
+			heap = new MaxHeapCP<TravelTime>();
+		}
 		CSVReader reader = null;
 		try
 		{
@@ -82,8 +87,8 @@ public class MVCModelo {
        while(conteo != 0)
        {
            double meanTravelTime = (Math.random() * (5000 - 100))+ 100;
-           int sourceId = (int) (Math.random() * (1500 - 1) + 1);
-           int distId = (int) (Math.random() * (1500 - 1) + 1);
+           int sourceId = (int) (Math.random() * (1500 - 1)) + 1;
+           int distId = (int) (Math.random() * (1500 - 1)) + 1;
            int hod = (int) (Math.random() * (23 - 0)) + 0;
            double standard_deviation_travel_time = (Math.random() * (1200 - 1)) + 1;
            TravelTime viaje = new TravelTime(meanTravelTime, trimestre, sourceId, distId, hod, standard_deviation_travel_time);
@@ -106,6 +111,13 @@ public class MVCModelo {
            conteo --;
        } return arr;
    }
-   }
+   
+public MaxHeapCP<TravelTime> darHeap() {
+	return heap;
+}
+public MaxColaCP<TravelTime> darCola(){
+	return cola;
+}
+}
 
 
