@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 import com.opencsv.CSVReader;
 
-import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
+import model.data_structures.MaxColaCP;
+import model.data_structures.MaxHeapCP;
 import model.data_structures.Queue;
 import model.data_structures.TravelTime;
-import model.data_structures.Viaje;
+
 
 /**
  * Definicion del modelo del mundo
@@ -21,26 +21,23 @@ public class MVCModelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico datos;
-	private Queue cola;
+	private MaxColaCP<TravelTime> cola;
+	private MaxHeapCP<TravelTime> heap;
 	
 	/**
 	 * Constructor del modelo del mundo en una cola
 	 * @param ruta
 	 */
-	public MVCModelo(String ruta)
-	{
-		loadTravelTimes(ruta, cola);
-	
-	}
-	
-	public Queue loadTravelTimes(String ruta, Queue colap)
+	public MVCModelo(int trimestre)
 	{
 		CSVReader reader = null;
 		try
 		{
-		Viaje agregar = null;
-		reader= new CSVReader(new FileReader(ruta));
+		TravelTime agregar = null;
+		if(trimestre==1)
+		reader= new CSVReader(new FileReader(".data/bogota-cadastral-2018-1-All-HourlyAggregate.csv"));
+		else if(trimestre==2)
+			reader= new CSVReader(new FileReader(".data/bogota-cadastral-2018-2-All-HourlyAggregate.csv"));
 		for(String[] nextLine : reader) {
 			if(nextLine.toString().contains("sourceid,dstid,hod,mean_travel_time,standard_deviation_travel_time,geometric_mean_travel_time,geometric_standard_deviation_travel_time"))
 			{
@@ -53,13 +50,13 @@ public class MVCModelo {
 				int hora=Integer.parseInt(nextLine[2]);
 				double tiempoPromedioEnSegundos=Double.parseDouble(nextLine[3]);
 				double desviacionEstandar=Double.parseDouble(nextLine[4]);
-				double tiempoPromedioGEnSegundos=Double.parseDouble(nextLine[5]);
-				double desviacionEstandarG=Double.parseDouble(nextLine[6]);
+		
 
-				Viaje i = new Viaje(inicioID,destinoID,hora,tiempoPromedioEnSegundos,desviacionEstandar,tiempoPromedioGEnSegundos,desviacionEstandarG);
+				TravelTime i = new TravelTime(tiempoPromedioEnSegundos,trimestre,inicioID,destinoID,hora,desviacionEstandar);
 				agregar = i;
 
-				colap.enQueue(i);
+				cola.agregar(i);
+				heap.agregar(i);
 			}
 		}
 	} catch (FileNotFoundException e) {
@@ -72,51 +69,44 @@ public class MVCModelo {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}}
 	}
-		return colap;
-}
 	
-	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
-	 */
-	public int darTamano()
-	{
-		return datos.darTamano();
-	}
 
-	/**
-	 * Requerimiento de agregar dato
-	 * @param dato
-	 */
-	public void agregar(String dato)
-	{	
-		datos.agregar(dato);
-	}
 	
-	/**
-	 * Requerimiento buscar dato
-	 * @param dato Dato a buscar
-	 * @return dato encontrado
-	 */
-	public String buscar(String dato)
-	{
-		return datos.buscar(dato);
-	}
-	
-	/**
-	 * Requerimiento eliminar dato
-	 * @param dato Dato a eliminar
-	 * @return dato eliminado
-	 */
-	public String eliminar(String dato)
-	{
-		return datos.eliminar(dato);
-	}
+
    public ArrayList<TravelTime> generarMuestra(int N){
-	   ArrayList<TravelTime> muestra = new ArrayList<TravelTime>();
-	   return muestra;
+	   int conteo = N;
+       ArrayList<TravelTime> arr = new ArrayList<TravelTime>(); 
+       int trimestre = (int) ((Math.random() * (4 - 1)) + 1);
+       boolean existe = false;
+       while(conteo != 0)
+       {
+           double meanTravelTime = (Math.random() * (5000 - 100))+ 100;
+           int sourceId = (int) (Math.random() * (1500 - 1) + 1);
+           int distId = (int) (Math.random() * (1500 - 1) + 1);
+           int hod = (int) (Math.random() * (23 - 0)) + 0;
+           double standard_deviation_travel_time = (Math.random() * (1200 - 1)) + 1;
+           TravelTime viaje = new TravelTime(meanTravelTime, trimestre, sourceId, distId, hod, standard_deviation_travel_time);
+           for(int i = 0 ; i < arr.size() ; i++)
+           {
+               if (viaje.darMeanTravelTime() == arr.get(i).darMeanTravelTime())
+               {
+                   existe = true;
+               }
+           }
+           if(existe == true)
+           {
+               conteo++;
+               existe = false;
+           }
+           else
+           {
+               arr.add(viaje);
+           }
+           conteo --;
+       } return arr;
+   }
    }
 
-}
+
