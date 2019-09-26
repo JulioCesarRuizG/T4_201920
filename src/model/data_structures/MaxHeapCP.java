@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import java.util.ArrayList;
+
 public class MaxHeapCP<T extends Comparable<T>> {
 
 	private T[] llaves;
@@ -7,7 +9,7 @@ public class MaxHeapCP<T extends Comparable<T>> {
 
 	public MaxHeapCP()
 	{
-		llaves = (T[]) new Object[1];
+		llaves = (T[]) new Comparable[1];
 		size = 0;
 	}
 
@@ -18,7 +20,7 @@ public class MaxHeapCP<T extends Comparable<T>> {
 
 	public void agregar(T dato) 
 	{     if (size == llaves.length - 1){
-		T[] temp = (T[]) new Object[llaves.length*2];
+		T[] temp = (T[]) new Comparable[llaves.length*2];
 		for (int i = 1; i <= size; i++) {
 			temp[i] = llaves[i];
 		}
@@ -48,7 +50,7 @@ public class MaxHeapCP<T extends Comparable<T>> {
 		sink(1);
 		llaves[size+1] = null;     
 		if ((size > 0) && (size == (llaves.length - 1) / 4)){
-			T[] temp = (T[]) new Object[llaves.length/2];
+			T[] temp = (T[]) new Comparable[llaves.length/2];
 			for (int i = 1; i <= size; i++) {
 				temp[i] = llaves[i];
 			}
@@ -80,4 +82,15 @@ public class MaxHeapCP<T extends Comparable<T>> {
 		else 
 			return false;
 	}
+	
+	public T[] darLLaves(){
+        return llaves;
+    }
+	
+	public T darMinimo(){
+        return llaves[size];
+    }
+    public T darMedio(){
+        return llaves[size/2];
+    }
 }

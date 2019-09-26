@@ -24,7 +24,7 @@ public class TravelTime implements Comparable<TravelTime>{
 	{
 		return standard_deviation_travel_time;
 	}
-	public double darHourOfDay()
+	public int darHourOfDay()
 	{
 		return hod;
 	}
