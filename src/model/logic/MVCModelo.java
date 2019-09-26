@@ -23,6 +23,7 @@ public class MVCModelo {
 	 */
 	private MaxColaCP<TravelTime> cola;
 	private MaxHeapCP<TravelTime> heap;
+	private ArrayList<TravelTime> muestraActual;
 
 	/**
 	 * Constructor del modelo del mundo en una cola
@@ -113,7 +114,9 @@ public class MVCModelo {
 				arr.add(viaje);
 			}
 			conteo --;
-		} return arr;
+		} 
+		muestraActual = arr;
+		return arr;
 	}
 
 	public MaxHeapCP<TravelTime> darHeap() {

@@ -65,8 +65,7 @@ public class PruebaColaPrioridad {
 			modelo1.darCola().agregar(viaje1);
 			modelo1.darHeap().agregar(viaje1);
 			TravelTime esperadoC = modelo1.darCola().darUltimo();
-			int valor = modelo1.darHeap().darNumElementos();
-			TravelTime esperadoH = modelo1.darHeap().darLLaves()[valor];
+			TravelTime esperadoH = modelo1.darHeap().darMinimo();
 			assertEquals("No se ha agregado correctamente: cola 10",viaje1, esperadoC);
 			assertEquals("No se ha agregado correctamente: heap 10",viaje1, esperadoH);
 		}
@@ -85,10 +84,9 @@ public class PruebaColaPrioridad {
 			modelo2.darCola().agregar(viaje2);
 			modelo2.darHeap().agregar(viaje2);
 			TravelTime esperadoC = (TravelTime) modelo2.darCola().darUltimoN().darItem();
-			int valor = modelo2.darHeap().darNumElementos();
-			TravelTime esperadoH = modelo1.darHeap().darLLaves()[valor];
-			assertEquals("No se ha agregado correctamente: 10",viaje2, esperadoC);
-			assertEquals("No se ha agregado correctamente: heap 10",viaje2, esperadoH);
+			TravelTime esperadoH = modelo2.darHeap().darMinimo();
+			assertEquals("No se ha agregado correctamente: 100",viaje2, esperadoC);
+			assertEquals("No se ha agregado correctamente: heap 100",viaje2, esperadoH);
 		}
 		catch(Exception e)
 		{
@@ -105,8 +103,7 @@ public class PruebaColaPrioridad {
 			modelo3.darCola().agregar(viaje3);
 			modelo3.darHeap().agregar(viaje3);
 			TravelTime esperadoC = (TravelTime) modelo3.darCola().darUltimoN().darItem();
-			int valor = modelo3.darHeap().darNumElementos();
-			TravelTime esperadoH = modelo1.darHeap().darLLaves()[valor];
+			TravelTime esperadoH = modelo3.darHeap().darMinimo();
 			assertEquals("No se ha agregado correctamente: 10",viaje3, esperadoC);
 			assertEquals("No se ha agregado correctamente: heap 10",viaje3, esperadoH);
 		}

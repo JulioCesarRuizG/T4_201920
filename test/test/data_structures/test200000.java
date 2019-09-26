@@ -72,5 +72,24 @@ public class test200000 {
 			long duracion2= fin2-inicio2;
 			System.out.println("Duracion cola:"+duracion2);
 		}
+		
+		@Test
+        public void sacarMax(){
+              setUp1();
+              long inicio = System.currentTimeMillis();
+              try {
+                  modelo.darHeap().sacarMax();
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+              long fin= System.currentTimeMillis();
+              long duracion= fin-inicio;
+              System.out.println("Duracion Heap:"+duracion);
+              long inicio2 = System.currentTimeMillis();
+              modelo.darCola().sacarMax();
+              long fin2= System.currentTimeMillis();
+              long duracion2= fin2-inicio2;
+              System.out.println("Duracion cola:"+duracion2);
+          }
 	
 	}
